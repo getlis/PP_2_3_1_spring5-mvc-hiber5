@@ -6,12 +6,17 @@
 </head>
 <body>
 <h1>Create New User</h1>
-    <form action="/users/create" method="post">
+    <form th:action="@{/users/create}"  th:object="${user}" method="post">
+
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="name" th:field="*{name}"  />
+        <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" >Error name</div>
         <br>
+
         <label for="age">Age:</label>
-        <input type="number" id="age" name="age" required>
+        <input type="number" id="age" th:field="*{age}" />
+        <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}" >Error age</div>
+
         <br>
         <button type="submit">Submit</button>
     </form>

@@ -1,6 +1,15 @@
 package org.example.models;
 
-import javax.persistence.*;
+
+
+import javax.validation.constraints.*;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 @Entity
 @Table(name = "tb_users")
@@ -10,9 +19,16 @@ public class User {
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column
+    @NotEmpty(message = "Required to fill in")
+    @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
+    @Pattern(regexp = "[a-zA-Z ]+?", message = "Only latin letters are allowed")
     private String name;
+
     @Column
+    @NotNull(message = "Required to fill in")
+    @Min( value = 1 , message = "From 1 year" )
     private int age;
 
 
